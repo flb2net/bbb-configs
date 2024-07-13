@@ -16,6 +16,8 @@ hosts:
     role: corerouter
     model: "zyxel_nwa55axe"
     wireless_profile: freifunk_default
+    host__rclocal__to_merge:
+      - 'cat /etc/crontabs/root | grep reboot 2>/dev/null || echo "15 * * * * reboot" >> /etc/crontabs/root && /etc/init.d/cron restart'
 
 ipv6_prefix: '2001:bf7:830:2600::/56'
 
@@ -72,3 +74,9 @@ location__channel_assignments_11a_standard__to_merge:
 
 location__channel_assignments_11g_standard__to_merge:
   huette-core: 13-20
+
+dns_servers:
+  - 2620:fe::fe
+  - 2620:fe::9
+  - 9.9.9.9
+  - 149.112.112.112
